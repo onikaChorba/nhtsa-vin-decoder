@@ -36,7 +36,14 @@
 
     ```bash
     git clone https://github.com/onikaChorba/nhtsa-vin-decoder.git
+    ```
+
+        ```bash
+
     cd nhtsa-vin-decoder
+
+    ```
+
     ```
 
 2.  **Встановіть залежності:**
