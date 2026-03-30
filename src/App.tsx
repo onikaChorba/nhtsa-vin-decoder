@@ -3,7 +3,6 @@ import { Header, Footer } from './components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HomePage, VariablesPage, VariableDetail } from './pages';
 
-
 function App() {
   return (
     <BrowserRouter>
