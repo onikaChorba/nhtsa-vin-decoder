@@ -1,73 +1,77 @@
-# React + TypeScript + Vite
+# NHTSA VIN Decoder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Сучасний веб-застосунок для повної розшифровки VIN-кодів автомобілів за допомогою офіційного **NHTSA vPIC API**. Проєкт побудований на **React 19**, **TypeScript** та **Vite 6**, з фокусом на продуктивність, типізацію та чистий інтерфейс.
 
-Currently, two official plugins are available:
+🔗 **Живий демо-перегляд:** [[https://nhtsa-vin-decoder.vercel.app](https://nhtsa-vin-decoder.vercel.app)]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Основний функціонал
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Миттєва розшифровка VIN:** Отримання технічних характеристик (марка, модель, рік, тип двигуна, системи безпеки тощо) за один клік.
+- **Інтерактивна таблиця результатів:** Зручне представлення даних з фільтрацією порожніх значень для кращої читабельності.
+- **Історія пошуку:** Автоматичне збереження останніх 3-х запитів у `localStorage` для швидкого повторного доступу.
+- **Довідник змінних (Variables Guide):** Повний список параметрів API з реалізованою клієнтською **пагінацією** (по 12 елементів на сторінку).
+- **Детальні сторінки:** Окрема сторінка для кожної технічної змінної з детальним описом (підтримка HTML-розмітки з API).
+- **Розумний інтерфейс:** Автоматичне очищення поля введення після успішного пошуку та валідація введених даних.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Технологічний стек
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Framework:** React 19
+- **Build Tool:** Vite 6
+- **Language:** TypeScript (зі строгою типізацією)
+- **Routing:** React Router 7
+- **Styling:** CSS Modules (використання CSS-змінних для легкої підтримки тем)
+- **Architecture:** Path Aliases для чистоти імпортів.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🚀 Локальний запуск
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Виконуйте ці кроки, щоб запустити проєкт на вашому комп'ютері:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1.  **Клонуйте репозиторій:**
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+    ```bash
+    git clone [https://github.com/onikaChorba/nhtsa-vin-decoder.git](https://github.com/onikaChorba/nhtsa-vin-decoder.git)
+    cd nhtsa-vin-decoder
+    ```
+
+2.  **Встановіть залежності:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Запустіть сервер для розробки:**
+
+    ```bash
+    npm run dev
+    ```
+
+4.  **Відкрийте застосунок:**
+    Перейдіть за адресою `http://localhost:5173` у вашому браузері.
+
+---
+
+## 📂 Структура проєкту та аліаси
+
+Для зручності розробки в проєкті налаштовані **Path Aliases**. Замість довгих відносних шляхів використовуйте:
+
+- `@/*` — коренева папка `src`
+
+---
+
+## 📝 Приклади VIN для тестування
+
+Ви можете скопіювати ці коди, щоб перевірити роботу розшифровувача:
+
+- **Tesla Model 3:** `5YJ3E1EB1JF000000`
+- **Ford F-150:** `1FTFW1RG5LFA00000`
+- **Toyota Camry:** `4T1B11HKJU0000000`
+
+---
+
+**Розроблено [onikaChorba](https://github.com/onikaChorba)**
