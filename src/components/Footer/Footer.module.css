@@ -1,0 +1,42 @@
+.footer {
+  padding: 3rem 1.5rem;
+  background-color: var(--white);
+  border-top: 1px solid var(--border);
+  margin-top: 4rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.copyright {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.apiLink {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.apiLink a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.apiLink a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 420px) {
+  .footer {
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+}
