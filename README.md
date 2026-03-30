@@ -35,7 +35,7 @@
 1.  **Клонуйте репозиторій:**
 
     ```bash
-    git clone [https://github.com/onikaChorba/nhtsa-vin-decoder.git](https://github.com/onikaChorba/nhtsa-vin-decoder.git)
+    git clone https://github.com/onikaChorba/nhtsa-vin-decoder.git
     cd nhtsa-vin-decoder
     ```
 
