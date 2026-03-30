@@ -17,16 +17,22 @@ const HomePage = () => {
   }, []);
 
   const handleSearch = async (targetVin: string) => {
-    if (!targetVin.trim()) return setError('Поле не може бути порожнім');
+    const cleanVin = targetVin.trim();
+    if (!cleanVin) return setError('Поле не може бути порожнім');
     setError('');
 
     try {
-      const data = await fetchVinData(targetVin);
+      const data = await fetchVinData(cleanVin);
       setApiMessage(data.Message);
-      const filtered = data.Results.filter((r: VinResult) => r.Value && r.Value !== 'null');
+
+      const filtered = data.Results.filter((r: VinResult) =>
+        r.Value && r.Value !== 'null' && r.Value.trim() !== ""
+      );
       setResults(filtered);
 
-      const newHistory = [targetVin, ...history.filter(h => h !== targetVin)].slice(0, 3);
+      setVin('');
+
+      const newHistory = [cleanVin, ...history.filter(h => h !== cleanVin)].slice(0, 3);
       setHistory(newHistory);
       localStorage.setItem('vin_history', JSON.stringify(newHistory));
     } catch {
@@ -61,11 +67,17 @@ const HomePage = () => {
         </div>
 
         <div className={styles.messageContainer}>
-          {error ? (
-            <p className={styles.errorMessage}>{error}</p>
-          ) : apiMessage ? (
-            <p className={styles.apiStatus}>Статус: {apiMessage}</p>
-          ) : null}
+          {error && (
+            <div className={styles.errorBadge}>
+              <span className={styles.icon}>⚠️</span> {error}
+            </div>
+          )}
+
+          {!error && apiMessage && (
+            <div className={`${styles.apiStatus} ${apiMessage.includes('successfully') ? styles.success : ''}`}>
+              {apiMessage.includes('successfully') ? '✅ Дані отримано' : `Статус: ${apiMessage}`}
+            </div>
+          )}
         </div>
       </section>
 
@@ -82,20 +94,36 @@ const HomePage = () => {
             </aside>
           )}
 
-          <section className={styles.resultsGrid}>
+          <div className={styles.tableContainer}>
             {results.length > 0 ? (
-              results.map((item, idx) => (
-                <div key={idx} className={styles.resultCard}>
-                  <div className={styles.label}>{item.Variable}</div>
-                  <div className={styles.value}>{item.Value}</div>
-                </div>
-              ))
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Параметр</th>
+                    <th>Значення</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {results.map((item, idx) => (
+                    <tr key={idx}>
+                      <td className={styles.paramName}>{item.Variable}</td>
+                      <td className={styles.paramValue}>
+                        {item.Value && item.Value.trim() !== "" ? (
+                          item.Value
+                        ) : (
+                          <span className={styles.empty}>—</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             ) : (
-              <div className={styles.infoCard}>
-                Результати з'являться тут після успішного пошуку
+              <div className={styles.emptyState}>
+                <p>Введіть VIN-код для отримання специфікації</p>
               </div>
             )}
-          </section>
+          </div>
         </div>
       ) : (
         <div className={styles.welcomeState}>

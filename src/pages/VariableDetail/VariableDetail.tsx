@@ -1,9 +1,9 @@
+import { Loader } from '@/components';
+import { fetchVariables } from '@/api';
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { fetchVariables } from '../../api';
-import { type VehicleVariable } from '../../types';
+import { type VehicleVariable } from '@/types';
 import styles from './VariableDetail.module.css';
-import { Loader } from '../../components';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const VariableDetail = () => {
   const { variableId } = useParams();
